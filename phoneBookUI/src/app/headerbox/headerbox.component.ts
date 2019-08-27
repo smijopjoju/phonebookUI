@@ -8,7 +8,7 @@ import { ContactService } from "../contact.service";
 import { Contact } from "../contact";
 import {MatSnackBar} from '@angular/material/snack-bar';
 import { ContactChangeEvent } from "../contact-change-event";
-
+import { CommunicationService } from "../communication.service"
 
 @Component({
   selector: 'app-headerbox',
@@ -21,9 +21,10 @@ export class HeaderboxComponent implements OnInit {
   @Output() contactsChangeEvent:EventEmitter<ContactChangeEvent> = new EventEmitter();
 
   constructor(
-    public dialog: MatDialog, 
+    public dialog: MatDialog,
     private contactsSharedService: ContactService,
-    private _snackBar: MatSnackBar) { }
+    private _snackBar: MatSnackBar,
+    private communicationService: CommunicationService) { }
 
   ngOnInit() {
     this.getLatestStatus();
@@ -34,7 +35,7 @@ export class HeaderboxComponent implements OnInit {
   }
 
   openAddNewContactDialog(): void{
-          
+
       const dialogRef = this.dialog.open(AddNewContactDialogComponent, {
         width: '400px',
         data: {
@@ -46,31 +47,35 @@ export class HeaderboxComponent implements OnInit {
           personalNumber: ''
         }
       });
-  
-      dialogRef.afterClosed().subscribe(result => {        
+
+      dialogRef.afterClosed().subscribe(result => {
         if(this.isValidContact(result)) {
-          let changeMessage = {action:'add',contacts:[result]};
-          this.emitContactChangeEvent(changeMessage);
-        }        
+          this.communicationService.addContact(result).subscribe(contact=>{
+            let changeMessage = {action:'add',contacts:[contact]};
+            this.emitContactChangeEvent(changeMessage);
+          });          
+        }
       });
-    
+
   }
 
-  openUpdateContactDialog(): void { 
+  openUpdateContactDialog(): void {
     if(this.isValidToPermitTheOperation()) {
       let dataStr = JSON.stringify(this.currentlySelectedContacts[0]);
       const dialogRef = this.dialog.open(UpdateContactDialogComponent, {
         width: '400px',
         data: JSON.parse(dataStr)
       });
-  
+
       dialogRef.afterClosed().subscribe(result => {
         if(this.isValidContact(result)) {
-          let changeMessage = {action:'update',contacts:[result]};
-          this.emitContactChangeEvent(changeMessage);
+          this.communicationService.updateContact(result).subscribe(contact=>{
+            let changeMessage = {action:'update',contacts:[contact]};
+            this.emitContactChangeEvent(changeMessage);
+          });           
         }
       });
-    } 
+    }
   }
 
   openDeleteContactDialog(): void {
@@ -80,14 +85,16 @@ export class HeaderboxComponent implements OnInit {
         width: '300px',
         data: JSON.parse(dataStr)
       });
-  
+
       dialogRef.afterClosed().subscribe(result => {
         if(this.isValidContact(result)) {
-          let changeMessage = {action:'delete',contacts:[result]};
-          this.emitContactChangeEvent(changeMessage);
+          this.communicationService.deleteContact(result).subscribe(contact=>{
+            let changeMessage = {action:'delete',contacts:[result]};
+            this.emitContactChangeEvent(changeMessage);
+          });          
         }
       });
-    }    
+    }
   }
 
   openUploadContactsDialog(): void {
@@ -127,7 +134,7 @@ export class HeaderboxComponent implements OnInit {
     this.getLatestStatus();
     if(this.currentlySelectedContacts != null && this.currentlySelectedContacts.length > 0) {
       return true;
-    } 
+    }
     this.openSnackBar("Select contact","Atleast one contact");
     return false;
   }
@@ -135,7 +142,7 @@ export class HeaderboxComponent implements OnInit {
   isValidContact(contact: Contact): boolean {
     if(contact != null && contact.contactName != null) {
       return true;
-    } 
+    }
     return false;
   }
 
