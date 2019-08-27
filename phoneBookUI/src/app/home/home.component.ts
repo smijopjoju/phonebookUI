@@ -38,6 +38,9 @@ export class HomeComponent implements OnInit {
       case 'delete':
               this.handleContactDeletion(event.contacts);
               break;
+      case 'getAll':
+              this.getAllContacts();
+              break;        
       default:
             break;                        
     }

@@ -1,6 +1,11 @@
 <div class="ContactsContainer">
-    <span>Upload file</span>
-    <input type="file" placeholder="Upload file" name="Upload file" [(ngModel)]="file">
-    <button mat-button (click)="onCancelClick()">Cancel</button>
-    <button mat-button [mat-dialog-close]="file" cdkFocusInitial>Upload</button>
+    <div class="uploader">
+            <input #fileInput type="file" ng2FileSelect [uploader]="uploader"/>
+    </div>
+    <div class="itemContainer">        
+        <button (click)="fileClicked()" class="upload">Upload</button>
+    </div>
+    <div class="itemContainer">
+        <button (click)="onCancelClick()" class="cancel">Cancel</button>
+    </div>
 </div>

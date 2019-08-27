@@ -103,7 +103,8 @@ export class HeaderboxComponent implements OnInit {
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      console.log(result);
+          let changeMessage = {action:'getAll',contacts:[result]};
+          this.emitContactChangeEvent(changeMessage);
     });
   }
 
@@ -125,9 +126,7 @@ export class HeaderboxComponent implements OnInit {
   }
 
   downloadContacts(): void {
-    if(this.isValidToDownload()) {
-
-    }
+    this.communicationService.downloadContacts();
   }
 
   isValidToDownload(): boolean {
