@@ -1,0 +1,6 @@
+<div class="ContactsContainer">
+    <span>Upload file</span>
+    <input type="file" placeholder="Upload file" name="Upload file" [(ngModel)]="file">
+    <button mat-button (click)="onCancelClick()">Cancel</button>
+    <button mat-button [mat-dialog-close]="file" cdkFocusInitial>Upload</button>
+</div>

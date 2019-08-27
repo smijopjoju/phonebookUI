@@ -1,0 +1,11 @@
+.buttonsContainer {
+    float: right;
+    width: 100%;
+    height: 95%;
+    padding-top: 1%;
+}
+.buttonsContainer .buttonHolder{
+    float: right;
+    width: auto;
+    height: 100%;
+}
