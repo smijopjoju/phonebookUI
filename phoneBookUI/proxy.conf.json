@@ -1,6 +1,8 @@
 {
-    "/api": {
+    "/contacts/*": {
       "target": "http://localhost:8091",
-      "secure": false
+      "secure": false,
+      "changeOrigin": true,
+      "logLevel": "debug"
     }
   }

@@ -11,7 +11,7 @@ export class CommunicationService {
   contactsBaseURL: string = "/contacts";
   contactsDownloadURL: string = "/contacts/download";
   contactsUploadURL: string = "/contacts/upload";
-  
+
   constructor(private http: HttpClient) { }
 
   getContacts() {
