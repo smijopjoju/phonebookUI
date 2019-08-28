@@ -114,7 +114,12 @@ export class HeaderboxComponent implements OnInit {
       this.isValidContact(this.currentlySelectedContacts[0])) {
       return true;
     }  else {
-      this.openSnackBar("Select contact","Only one contact");
+      if(this.currentlySelectedContacts != null) {
+        this.openSnackBar("Please ","select a contact");
+      } else {
+        this.openSnackBar("Expected to select one contact","Please deselect to one");
+      }
+      
     }
     return false;
   }

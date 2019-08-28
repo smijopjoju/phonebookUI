@@ -20,7 +20,7 @@ export class ContactsListComponent implements OnInit,OnChanges {
   dataSource = new MatTableDataSource<Contact>(this.contacts);
 
   ngOnInit() {
-    this.dataSource = new MatTableDataSource<Contact>(this.contacts);
+    this.dataSource.data = this.contacts;
   }
 
   ngOnChanges(changes: {[propKey:string]: SimpleChange}) {
@@ -28,7 +28,8 @@ export class ContactsListComponent implements OnInit,OnChanges {
     for (let propName in changes) {
       let changedProp = changes[propName];
       this.contacts = changedProp.currentValue;
-      this.dataSource.data = this.contacts;
+      this.dataSource.data = this.contacts;      
+      this.selection.clear();
     }
   }
   
@@ -63,5 +64,9 @@ export class ContactsListComponent implements OnInit,OnChanges {
     this.currentlySelectedContacts = this.selection.selected;
     this.contactsSharedService.setSelectedContacts(this.currentlySelectedContacts);
     return `${this.selection.isSelected(row) ? 'deselect' : 'select'} row ${row.id + 1}`;
+  }
+
+  applyFilter(filterValue: string) {
+    this.dataSource.filter = filterValue.trim().toLowerCase();
   }
 }
