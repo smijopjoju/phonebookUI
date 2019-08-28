@@ -1,0 +1,30 @@
+.ContactsContainer {
+    width: 250px;
+    height: 150px;
+}
+
+.uploader {
+    width: 100%;
+    height: 30%;
+    float: left;
+}
+.itemContainer {
+    width: 50%;
+    height: 70%;
+    float: left;
+}
+.upload {
+    width: 60px;
+    height: 40px;
+    margin: 0 auto;
+    background: green;
+    color: white;
+}
+ 
+.cancel {
+    width: 60px;
+    height: 40px;
+    margin: 0 auto;
+    background: white;
+    color: black;
+}

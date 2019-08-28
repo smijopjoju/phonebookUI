@@ -1,0 +1,33 @@
+<form class="ContactsContainer">
+        <mat-form-field class="column">
+                <input matInput placeholder="Contact Name" name="contactName" [(ngModel)]="data.contactName" [formControl]="nameFormControl"
+                       [errorStateMatcher]="matcher">
+                <mat-hint>Errors appear instantly!</mat-hint>
+                <mat-error *ngIf="nameFormControl.hasError('required')">
+                  Contact name is <strong>required</strong>
+                </mat-error>
+        </mat-form-field>
+
+        <mat-form-field class="column">
+                <input matInput placeholder="Personal Number" name="personalNumber" [(ngModel)]="data.personalNumber">
+        </mat-form-field>
+
+        <mat-form-field class="column">
+                <input matInput placeholder="Office Number" name="officeNumber" [(ngModel)]="data.officeNumber">                
+        </mat-form-field>
+
+        <mat-form-field class="column">
+                <input matInput placeholder="Home Number" name="homeNumber" [(ngModel)]="data.homeNumber">                
+        </mat-form-field>
+
+        <mat-form-field class="column">
+                <input matInput placeholder="Email Number" name="emailID" [formControl]="emailFormControl"
+                [errorStateMatcher]="matcher" [(ngModel)]="data.emailId">
+                <mat-hint>Errors appear instantly!</mat-hint>
+                <mat-error *ngIf="emailFormControl.hasError('email')">
+                    Please enter a valid email address
+                </mat-error>                
+        </mat-form-field>
+        <button mat-button (click)="onCancelClick()">Cancel</button>
+        <button mat-button [mat-dialog-close]="data" cdkFocusInitial>Update</button>
+</form>

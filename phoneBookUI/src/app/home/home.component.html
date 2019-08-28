@@ -1,0 +1,10 @@
+<div class="appContainer">
+    <div class="mainContentArea">
+        <div class="toolBox">
+          <app-headerbox (contactsChangeEvent)="recieveEvent($event)"></app-headerbox>
+        </div>
+        <div class="contactListsArea">
+          <app-contacts-list [contacts]="contacts"></app-contacts-list>
+        </div>
+    </div>
+  </div>

@@ -1,0 +1,10 @@
+.ContactsContainer {
+    width: 350px;
+    height: 450px;
+}
+
+.ContactsContainer .column{
+    width: 100%;
+    float: left;
+    height: 80px;
+}

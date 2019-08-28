@@ -1,0 +1,11 @@
+<div class="ContactsContainer">
+    <div class="uploader">
+            <input #fileInput type="file" ng2FileSelect [uploader]="uploader"/>
+    </div>
+    <div class="itemContainer">        
+        <button (click)="fileClicked()" class="upload">Upload</button>
+    </div>
+    <div class="itemContainer">
+        <button (click)="onCancelClick()" class="cancel">Cancel</button>
+    </div>
+</div>
